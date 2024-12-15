@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ваш абонемент</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+         body {
+             font-family: Candara, sans-serif;
+             line-height: 1.6;
+             background-color: #f4f7f6;
+             color: #333;
+         }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        .table-bordered th, .table-bordered td {
+            text-align: center;
+        }
+        .btn-pastel-green {
+            background-color: #77dd77;
+            color: white;
+            border: none;
+        }
+        .btn-pastel-green:hover {
+            background-color: #66cc66;
+        }
+        .text-center button {
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Информация о пользователе</h1>
+
+    <h2>Пользователь</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Логин</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${user.name}">Имя</td>
+            <td th:text="${user.lastname}">Фамилия</td>
+            <td th:text="${user.login}">Логин</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Учетная запись</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Возраст</th>
+            <th scope="col">Дата создания</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${userAccount.nameAcc}">Название</td>
+            <td th:text="${userAccount.age}">Возраст</td>
+            <td th:text="${#dates.format(userAccount.createdDate, 'dd.MM.yyyy')}">Дата создания</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Тип аккаунта</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Название типа аккаунта</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${account.typeAccount}">Название типа аккаунта</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+        <a href="/take_book">
+            <button type="button" class="btn btn-pastel-green">Каталог книг</button>
+        </a>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/my_book">
+            <button type="button" class="btn btn-pastel-green">Мои книги</button>
+        </a>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/search_book">
+            <button type="button" class="btn btn-pastel-green">Найти книгу</button>
+        </a>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="/filter_age">
+            <button type="button" class="btn btn-pastel-green">Подборка по возрасту</button>
+        </a>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/userStatistic">
+            <button type="button" class="btn btn-pastel-green">Статистика</button>
+        </a>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="/userPage">
+            <button type="button" class="btn btn-pastel-green">Назад</button>
+        </a>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

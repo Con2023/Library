@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление книжным фондом</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Candara, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #333;
+        }
+        .row {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-info {
+            background-color: #5bc0de;
+            color: white;
+            border: none;
+        }
+        .btn-info:hover {
+            background-color: #31b0d5;
+        }
+        .table th, .table td {
+            padding: 15px;
+            text-align: center;
+        }
+        .table th {
+            background-color: #77dd77;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Управление книжным фондом</h1>
+
+    <form id="filterForm" class="mb-4">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="sort">Сортировать по:</label>
+                <select id="sort" class="form-select">
+                    <option value="title">Название</option>
+                    <option value="author">Автор</option>
+                    <option value="year">Год</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="order">Порядок:</label>
+                <select id="order" class="form-select">
+                    <option value="asc">По возрастанию</option>
+                    <option value="desc">По убыванию</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="button" class="btn btn-info" onclick="loadBooks()">Применить сортировку</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-container">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Год</th>
+                <th>Жанры</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody id="bookList">
+            <!-- Данные будут загружаться сюда -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/addBook">
+            <button type="button" class="btn btn-info">Добавить книгу</button>
+        </a>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="/adminPage">
+            <button type="button" class="btn btn-info">Назад</button>
+        </a>
+    </div>
+</div>
+
+<script>
+    // Функция для загрузки книг с API
+    async function loadBooks() {
+        const sort = document.getElementById('sort').value;
+        const order = document.getElementById('order').value;
+
+        // Формируем URL для запроса с параметрами сортировки и порядка
+        const url = `/api/books?sort=${sort}&order=${order}`;
+
+        const response = await fetch(url);
+        const books = await response.json();
+
+        let booksHtml = '';
+        books.forEach(book => {
+            booksHtml += `<tr>
+                <td>${book.id}</td>
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.year}</td>
+                <td>${book.genresString}</td>
+                <td>
+                    <a href="/edit_book/${book.id}">
+                        <button type="button" class="btn btn-info">Редактировать</button>
+                    </a>
+                    <a href="/delete_book/${book.id}">
+                        <button type="button" class="btn btn-info">Удалить</button>
+                    </a>
+                </td>
+            </tr>`;
+        });
+
+        document.getElementById('bookList').innerHTML = booksHtml;
+    }
+
+    // Загружаем книги при загрузке страницы
+    window.onload = loadBooks;
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

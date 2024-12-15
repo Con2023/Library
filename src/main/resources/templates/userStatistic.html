@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статистика пользователя</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Candara, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 50px;
+        }
+        h2 {
+            color: #333;
+        }
+        .text-center button {
+            width: 300px;
+        }
+        .btn-pastel-green {
+            background-color: #77dd77;
+            color: white;
+            border: none;
+        }
+        .btn-pastel-green:hover {
+            background-color: #66cc66;
+        }
+        .row {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .stats-text {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Статистика пользователя</h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h2>  Общие показатели:</h2>
+            <p class="stats-text text-center"><strong>Общее количество книг, которые вы взяли:</strong> <span th:text="${booksTaken}">0</span></p>
+            <p class="stats-text text-center"><strong>Общее количество книг, которые вы вернули:</strong> <span th:text="${completedBooksCount}">0</span></p>
+            <p class="stats-text text-center"><strong>Среднее время, которое книги находятся у вас (в часах):</strong> <span th:text="${avgTime}">0</span></p>
+            <p class="stats-text text-center"><strong>Общее время, проведенное за чтением (в часах):</strong> <span th:text="${totalDuration}">0</span></p>
+
+            <div class="text-center mt-4">
+                <a href="/watch_account">
+                    <button type="button" class="btn btn-pastel-green">Назад</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
